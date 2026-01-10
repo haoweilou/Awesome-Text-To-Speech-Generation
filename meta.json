@@ -1,0 +1,111 @@
+{
+    "tacotron":{
+        "year": "2017-MAR",
+        "training_data": 24.6,
+        "parameters": 6.9,
+        "generated_time": -1,
+        "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    },
+    "tacotron 2":{
+        "year": "2017-DEC",
+        "training_data": 24.6,
+        "parameters": 28.2,
+        "generated_time": -1,
+        "inference_time": 22.40,
+        "cuda_mem": 1722.72,
+        "frame_length": 15021
+    },
+    "FastSpeech":{
+        "year": "2019-MAY",
+        "training_data": 24,
+        "parameters": 30.1,
+        "generated_time": -1,
+        "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    },
+    "FastSpeech 2":{
+        "year": "2020-JUN",
+        "training_data": 24,
+        "parameters": 27,
+        "generated_time": -1,
+        "inference_time": 20.76,
+        "cuda_mem": 443.29,
+        "frame_length": 13817
+    },
+    "Glow-TTS": {
+        "year": "2020-MAY",
+        "training_data": 78,
+        "parameters": 28.6,
+        "generated_time": -1,
+        "inference_time": 61.50,
+        "cuda_mem": 8077.96,
+        "frame_length": 15226
+    },
+    "VITS": {
+        "year": "2021-JUN",
+        "training_data": 68,
+        "parameters": 36.3,
+        "generated_time": -1,
+        "inference_time": 8.80,
+        "cuda_mem": 343.41,
+        "frame_length": 15277
+    },
+    "Voicebox": {
+        "year": "2023-JUN",
+        "training_data": 60000,
+        "parameters": 330,
+        "generated_time": -1,
+        "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    },
+    
+    "E2-TTS": {
+        "year": "2024-JUN",
+        "training_data": 250000,
+        "parameters": 335,
+        "generated_time": -1,
+        "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    },
+    "CosyVoice": {
+        "year": "2024-JUL",
+        "training_data": 171800,
+        "parameters": 436,
+        "generated_time": -1,
+        "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    },
+    "IndexTTS": {
+        "year": "2025-FEB",
+        "training_data": 34000,
+        "parameters": 608,
+        "generated_time": -1,
+        "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    },
+    "Qwen2.5-Omni": {
+        "year": "2025-MAR",
+        "training_data": 3333333,
+        "parameters": 7500,
+        "generated_time": -1,
+        "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    },
+    "F5-TTS": {
+        "year": "2025-JUL",
+        "training_data": 95000,
+        "parameters": -1,
+        "generated_time": -1,
+        "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    }
+}
