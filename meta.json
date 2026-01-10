@@ -72,6 +72,15 @@
         "cuda_mem": -1,
         "frame_length": -1
     },
+    "F5-TTS": {
+        "year": "2025-JUL",
+        "training_data": 95000,
+        "parameters": -1,
+        "generated_time": -1,
+        "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    },
     "CosyVoice": {
         "year": "2024-JUL",
         "training_data": 171800,
@@ -94,15 +103,6 @@
         "year": "2025-MAR",
         "training_data": 3333333,
         "parameters": 7500,
-        "generated_time": -1,
-        "inference_time": -1,
-        "cuda_mem": -1,
-        "frame_length": -1
-    },
-    "F5-TTS": {
-        "year": "2025-JUL",
-        "training_data": 95000,
-        "parameters": -1,
         "generated_time": -1,
         "inference_time": -1,
         "cuda_mem": -1,
