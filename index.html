@@ -210,6 +210,18 @@
             textLabel.className = "model";
             textLabel.textContent = "Text";
             textRow.appendChild(textLabel);
+
+            for (const id of chosen) {
+                const td = document.createElement("td");
+                const div = document.createElement("div");
+                div.className = "small";
+                div.id = `txt-${id}`;
+                div.textContent = "Loading text...";
+                td.appendChild(div);
+                textRow.appendChild(td);
+            }
+
+            tbody.appendChild(textRow);
             for (const m of MODELS) {
                 const tr = document.createElement("tr");
 
