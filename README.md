@@ -19,3 +19,5 @@ Results are calculated by generating the provided samples on consumer-level hard
 # Speech Samples
 👉 **Demo page:**  
 https://haoweilou.github.io/Awesome-Text-To-Speech-Generation/
+
+For better visibility, please view this on a desktop.
