@@ -1,224 +1,306 @@
 <!doctype html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>TTS Random Sample Comparison</title>
-  <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; }
-    h1 { margin: 0 0 8px; font-size: 22px; }
-    .desc { margin: 0 0 18px; color: #333; line-height: 1.4; }
-    .controls { display: flex; gap: 10px; align-items: center; margin: 12px 0 16px; flex-wrap: wrap; }
-    button { padding: 8px 12px; cursor: pointer; }
-    .badge { display: inline-block; padding: 2px 8px; border: 1px solid #ccc; border-radius: 999px; font-size: 12px; }
-    table { border-collapse: collapse; width: 100%; }
-    th, td { border: 1px solid #ddd; padding: 10px; vertical-align: top; }
-    th { background: #f7f7f7; text-align: left; }
-    td.model { font-weight: 600; white-space: nowrap; width: 180px; }
-    .cell { display: flex; flex-direction: column; gap: 6px; }
-    .small { font-size: 12px; color: #555; }
-    audio { width: 260px; max-width: 100%; }
-    .warning { color: #b00020; font-size: 13px; margin-top: 10px; }
-    code { background: #f2f2f2; padding: 2px 4px; border-radius: 4px; }
-  </style>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TTS Random Sample Comparison</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            margin: 24px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 22px;
+        }
+
+        .desc {
+            margin: 0 0 18px;
+            color: #333;
+            line-height: 1.4;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin: 12px 0 16px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border: 1px solid #ccc;
+            border-radius: 999px;
+            font-size: 12px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f7f7f7;
+            text-align: left;
+        }
+
+        td.model {
+            font-weight: 600;
+            white-space: nowrap;
+            width: 180px;
+        }
+
+        .cell {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .small {
+            font-size: 12px;
+            color: #555;
+        }
+
+        audio {
+            width: 260px;
+            max-width: 100%;
+        }
+
+        .warning {
+            color: #b00020;
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        code {
+            background: #f2f2f2;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+    </style>
 </head>
+
 <body>
-  <!-- Header on top of the table -->
-  <h1 id="pageTitle">TTS Samples Page: Random 5/50 Sample Comparison</h1>
-  <p class="desc" id="pageDesc">
-    Below is a side-by-side comparison of generated speech from different TTS Systems.
-    Each column is a randomly selected sample ID (from 0–49). The text shown is the
-    <b>text</b> input that all models should speak for that sample.
-  </p>
+    <!-- Header on top of the table -->
+    <h1 id="pageTitle">TTS Samples Page: Random 5/50 Sample Comparison</h1>
+    <p class="desc" id="pageDesc">
+        Below is a side-by-side comparison of generated speech from different TTS Systems.
+        Each column is a randomly selected sample ID (from 0–49). The text shown is the
+        <b>text</b> input that all models should speak for that sample.
+    </p>
 
-  <div class="controls">
-    <button id="rerollBtn" type="button">Reroll 5 random samples</button>
-    <span class="badge">Selected IDs: <span id="chosenIds">-</span></span>
-    <span class="small">Tip: put audio at <code>samples/&lt;model&gt;/&lt;id&gt;.wav</code> (or change config below).</span>
-  </div>
+    <div class="controls">
+        <button id="rerollBtn" type="button">Reroll 5 random samples</button>
+        <span class="badge">Selected IDs: <span id="chosenIds">-</span></span>
+        <span class="small">Tip: put audio at <code>samples/&lt;model&gt;/&lt;id&gt;.wav</code> (or change config
+            below).</span>
+    </div>
 
-  <div id="tableWrap"></div>
-  <div id="warn" class="warning"></div>
+    <div id="tableWrap"></div>
+    <div id="warn" class="warning"></div>
 
-<script>
-/**
- * ========= CONFIG =========
- * 1) List your models here: name shown in first column + folder path.
- *    Example: samples/E2-TTS/0.wav ... 49.wav
- */
-const MODELS = [
-{name: "Tacotron 1 & 2", path: "docs/Tacotron 1 & 2"},
-{name: "FastSpeech 1 & 2", path: "docs/FastSpeech 1 & 2"},
-{name: "Glow-TTS", path: "docs/Glow-TTS"},
-{name: "VITS", path: "docs/VITS"},
-{name: "E2-TTS", path: "docs/E2-TTS" },
-{name: "F5-TTS", path: "docs/FT-TTS"},
-{name: "CosyVoice", path: "docs/CosyVoice"},
-{name: "IndexTTS", path: "docs/IndexTTS"},
-];
+    <script>
+        /**
+         * ========= CONFIG =========
+         * 1) List your models here: name shown in first column + folder path.
+         *    Example: samples/E2-TTS/0.wav ... 49.wav
+         */
+        const MODELS = [
+            { name: "Tacotron 1 & 2", path: "docs/Tacotron" },
+            { name: "FastSpeech 1 & 2", path: "docs/FastSpeech 1 & 2" },
+            { name: "Glow-TTS", path: "docs/Glow-TTS" },
+            { name: "VITS", path: "docs/VITS" },
+            { name: "E2-TTS", path: "docs/E2-TTS" },
+            { name: "F5-TTS", path: "docs/FT-TTS" },
+            { name: "CosyVoice", path: "docs/CosyVoice" },
+            { name: "IndexTTS", path: "docs/IndexTTS" },
+        ];
 
-const TRANSCRIPT_MODE = "file";
-const TEXT_FILE = "./text.txt";
+        const TRANSCRIPT_MODE = "file";
+        const TEXT_FILE = "./text.txt";
 
-let TEXT_LINES = null;
+        let TEXT_LINES = null;
 
-async function loadTextFile() {
-  if (TEXT_LINES) return TEXT_LINES;
-  const res = await fetch(TEXT_FILE, { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to load text.txt");
-  const text = await res.text();
-  TEXT_LINES = text
-    .split(/\r?\n/)
-    .map(l => l.trim());
-  return TEXT_LINES;
-}
+        async function loadTextFile() {
+            if (TEXT_LINES) return TEXT_LINES;
+            const res = await fetch(TEXT_FILE, { cache: "no-store" });
+            if (!res.ok) throw new Error("Failed to load text.txt");
+            const text = await res.text();
+            TEXT_LINES = text
+                .split(/\r?\n/)
+                .map(l => l.trim());
+            return TEXT_LINES;
+        }
 
-/**
- * 3) Audio file naming
- */
-const AUDIO_EXT = "wav";      // wav / mp3 / etc.
-const INDEX_MIN = 0;
-const INDEX_MAX = 49;
-const PICK_K = 5;
+        /**
+         * 3) Audio file naming
+         */
+        const AUDIO_EXT = "wav";      // wav / mp3 / etc.
+        const INDEX_MIN = 0;
+        const INDEX_MAX = 49;
+        const PICK_K = 5;
 
-/* ========= END CONFIG ========= */
+        /* ========= END CONFIG ========= */
 
-function randInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+        function randInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
 
-function sampleUniqueK(min, max, k) {
-  const set = new Set();
-  while (set.size < k) set.add(randInt(min, max));
-  return Array.from(set).sort((a,b) => a-b);
-}
+        function sampleUniqueK(min, max, k) {
+            const set = new Set();
+            while (set.size < k) set.add(randInt(min, max));
+            return Array.from(set).sort((a, b) => a - b);
+        }
 
-async function loadTranscript(id) {
-  if (TRANSCRIPT_MODE === "file") {
-    try {
-      const lines = await loadTextFile();
-      return lines[id] ?? `Missing text for sample ${id}`;
-    } catch (e) {
-      return "Failed to load text.txt";
-    }
-  }
-}
+        async function loadTranscript(id) {
+            if (TRANSCRIPT_MODE === "file") {
+                try {
+                    const lines = await loadTextFile();
+                    return lines[id] ?? `Missing text for sample ${id}`;
+                } catch (e) {
+                    return "Failed to load text.txt";
+                }
+            }
+        }
 
 
-function audioSrc(modelPath, id) {
-  return `${modelPath}/${id}.${AUDIO_EXT}`;
-}
+        function audioSrc(modelPath, id) {
+            const fid = pad2(id);
+            return `${modelPath}/${fid}.${AUDIO_EXT}`;
+        }
 
-function buildTableSkeleton(chosen) {
-  const table = document.createElement("table");
-  const thead = document.createElement("thead");
-  const trh = document.createElement("tr");
+        function buildTableSkeleton(chosen) {
+            const table = document.createElement("table");
+            const thead = document.createElement("thead");
+            const trh = document.createElement("tr");
 
-  const th0 = document.createElement("th");
-  th0.textContent = "Model";
-  trh.appendChild(th0);
+            const th0 = document.createElement("th");
+            th0.textContent = "Model";
+            trh.appendChild(th0);
 
-  for (const id of chosen) {
-    const th = document.createElement("th");
-    th.textContent = `Sample ${id}`;
-    trh.appendChild(th);
-  }
+            for (const id of chosen) {
+                const th = document.createElement("th");
+                th.textContent = `Sample ${id}`;
+                trh.appendChild(th);
+            }
 
-  thead.appendChild(trh);
-  table.appendChild(thead);
+            thead.appendChild(trh);
+            table.appendChild(thead);
 
-  const tbody = document.createElement("tbody");
-  for (const m of MODELS) {
-    const tr = document.createElement("tr");
+            const tbody = document.createElement("tbody");
+            const textRow = document.createElement("tr");
 
-    const tdModel = document.createElement("td");
-    tdModel.className = "model";
-    tdModel.textContent = m.name;
-    tr.appendChild(tdModel);
+            const textLabel = document.createElement("td");
+            textLabel.className = "model";
+            textLabel.textContent = "Text";
+            textRow.appendChild(textLabel);
+            for (const m of MODELS) {
+                const tr = document.createElement("tr");
 
-    for (const id of chosen) {
-      const td = document.createElement("td");
-      const cell = document.createElement("div");
-      cell.className = "cell";
+                const tdModel = document.createElement("td");
+                tdModel.className = "model";
+                tdModel.textContent = m.name;
+                tr.appendChild(tdModel);
 
-      const t = document.createElement("div");
-      t.className = "small";
-      t.id = `txt-${id}`; // fill later once per column (same for all models)
-      t.textContent = "Loading text...";
-      cell.appendChild(t);
+                for (const id of chosen) {
+                    const td = document.createElement("td");
+                    const cell = document.createElement("div");
+                    cell.className = "cell";
 
-      const a = document.createElement("audio");
-      a.controls = true;
-      a.preload = "none";
+                    const a = document.createElement("audio");
+                    a.controls = true;
+                    a.preload = "none";
 
-      const src = document.createElement("source");
-      src.src = audioSrc(m.path, id);
-      src.type = `audio/${AUDIO_EXT === "mp3" ? "mpeg" : AUDIO_EXT}`;
-      a.appendChild(src);
+                    const src = document.createElement("source");
+                    src.src = audioSrc(m.path, id);
+                    src.type = `audio/${AUDIO_EXT === "mp3" ? "mpeg" : AUDIO_EXT}`;
+                    a.appendChild(src);
 
-      // Friendly error message if file missing
-      a.addEventListener("error", () => {
-        td.dataset.missing = "1";
-      });
+                    // Friendly error message if file missing
+                    a.addEventListener("error", () => {
+                        td.dataset.missing = "1";
+                    });
 
-      cell.appendChild(a);
+                    cell.appendChild(a);
 
-      const p = document.createElement("div");
-      p.className = "small";
-      p.textContent = `${m.path}/${id}.${AUDIO_EXT}`;
-      cell.appendChild(p);
+                    const p = document.createElement("div");
+                    p.className = "small";
+                    p.textContent = `${m.path}/${id}.${AUDIO_EXT}`;
+                    cell.appendChild(p);
 
-      td.appendChild(cell);
-      tr.appendChild(td);
-    }
+                    td.appendChild(cell);
+                    tr.appendChild(td);
+                }
 
-    tbody.appendChild(tr);
-  }
+                tbody.appendChild(tr);
+            }
 
-  table.appendChild(tbody);
-  return table;
-}
+            table.appendChild(tbody);
+            return table;
+        }
 
-async function fillTranscripts(chosen) {
-  // Each sample ID transcript is the same across models, so fill by column id once.
-  for (const id of chosen) {
-    const txt = await loadTranscript(id);
-    // Fill all elements with matching id (one per table cell, but same id used, so querySelectorAll)
-    document.querySelectorAll(`#txt-${CSS.escape(String(id))}`).forEach(el => {
-      el.textContent = txt;
-    });
-  }
-}
+        async function fillTranscripts(chosen) {
+            // Each sample ID transcript is the same across models, so fill by column id once.
+            for (const id of chosen) {
+                const txt = await loadTranscript(id);
+                // Fill all elements with matching id (one per table cell, but same id used, so querySelectorAll)
+                document.querySelectorAll(`#txt-${CSS.escape(String(id))}`).forEach(el => {
+                    el.textContent = txt;
+                });
+            }
+        }
 
-function showMissingWarning() {
-  const warn = document.getElementById("warn");
-  // If any td has missing flag, show hint
-  const missing = document.querySelectorAll('td[data-missing="1"]').length;
-  if (missing > 0) {
-    warn.textContent =
-      `Some audio files failed to load. Check that your paths match the config and files exist. ` +
-      `Example expected: samples/E2-TTS/0.${AUDIO_EXT}`;
-  } else {
-    warn.textContent = "";
-  }
-}
+        function pad2(n) {
+            return String(n).padStart(2, "0");
+        }
 
-async function render() {
-  const chosen = sampleUniqueK(INDEX_MIN, INDEX_MAX, PICK_K);
-  document.getElementById("chosenIds").textContent = chosen.join(", ");
+        function showMissingWarning() {
+            const warn = document.getElementById("warn");
+            // If any td has missing flag, show hint
+            const missing = document.querySelectorAll('td[data-missing="1"]').length;
+            if (missing > 0) {
+                warn.textContent =
+                    `Some audio files failed to load. Check that your paths match the config and files exist. ` +
+                    `Example expected: samples/E2-TTS/0.${AUDIO_EXT}`;
+            } else {
+                warn.textContent = "";
+            }
+        }
 
-  const wrap = document.getElementById("tableWrap");
-  wrap.innerHTML = "";
-  wrap.appendChild(buildTableSkeleton(chosen));
+        async function render() {
+            const chosen = sampleUniqueK(INDEX_MIN, INDEX_MAX, PICK_K);
 
-  await fillTranscripts(chosen);
-  showMissingWarning();
-}
+            document.getElementById("chosenIds").textContent = chosen.join(", ");
 
-document.getElementById("rerollBtn").addEventListener("click", render);
+            const wrap = document.getElementById("tableWrap");
+            wrap.innerHTML = "";
+            wrap.appendChild(buildTableSkeleton(chosen));
 
-// initial render
-render();
-</script>
+            await fillTranscripts(chosen);
+            showMissingWarning();
+        }
+
+        document.getElementById("rerollBtn").addEventListener("click", render);
+
+        // initial render
+        render();
+    </script>
 </body>
+
 </html>
