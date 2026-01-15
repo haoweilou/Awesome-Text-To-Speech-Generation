@@ -1,7 +1,7 @@
 # Awesome Text-To-Speech Generation
 This repository is prepared to present representative text-to-speech (TTS) systems. 
 
-# Depployability
+# Deployability
 Results are calculated by generating the provided samples on consumer-level hardware. All experiments are conducted on an NVIDIA RTX 4060 laptop GPU. The reported results include the **full inference pipeline**, covering text tokenization, spectrogram or token generation, and waveform generation. For models that require a separate vocoder, the vocoder inference time is also included. Reported GPU memory usage is the **peak memory consumption** during the entire inference process.
 
 
