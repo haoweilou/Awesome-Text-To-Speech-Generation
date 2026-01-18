@@ -99,7 +99,6 @@
         "cuda_mem": 1567.35,
         "frame_length": -1
     },
-
     "Qwen2.5-Omni": {
         "year": "2025-MAR",
         "training_data": 3333333,
