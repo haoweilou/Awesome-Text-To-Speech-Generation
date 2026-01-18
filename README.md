@@ -21,3 +21,22 @@ Results are calculated by generating the provided samples on consumer-level hard
 https://haoweilou.github.io/Awesome-Text-To-Speech-Generation/
 
 For better visibility, please view this on a desktop.
+
+# Figures
+
+This section presents key experimental and analyses for different TTS systems presented in this repository.
+
+
+### CUDA Memory Usage
+<img src="./fig/cuda.png" width="650"/>
+
+### Model Size
+<img src="./fig/parameters.png" width="650"/>
+
+
+### Real-Time Factor (RTF)
+<img src="./fig/rtf.png" width="650"/>
+
+
+### Training Data Scale
+<img src="./fig/training_data.png" width="650"/>
