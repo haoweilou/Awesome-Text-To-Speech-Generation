@@ -13,6 +13,7 @@ Results are calculated by generating the provided samples on consumer-level hard
 | VITS | 2021-JUN | 343.41 (MB) | 0.05 | 5.91 |
 | E2-TTS | 2024-JUN | 3200 (MB) | 7.23 | -4.50 |
 | F5-TTS | 2025-JUL | 2200 (MB) | 6.15 | -3.72 |
+| Vall-E-X | 2023-MAR | 1822.86 (MB) | 0.42 | 0.40 | 
 | CosyVoice | 2024-JUL | 2097.67 (MB) | 3.74 | -2.94 |
 | IndexTTS | 2025-FEB | 1567.35 (MB) | 0.36 | 0.86 | 
 
