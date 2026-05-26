@@ -21,7 +21,7 @@ Results are calculated by generating the provided samples on consumer-level hard
 <!-- 👉 **Demo page:**  
 https://haoweilou.github.io/Awesome-Text-To-Speech-Generation/ -->
 
-For better visibility, please view this on a desktop.
+For better visibility, please view this on a desktop. Speech samples are located in the /docs/ folder
 
 # Figures
 
