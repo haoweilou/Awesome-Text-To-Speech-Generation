@@ -7,7 +7,7 @@ Results are calculated by generating the provided samples on consumer-level hard
 
 | Model | Year | CUDA Memory | RTF | Deployability |
 |-------|------|-------------|-----| ------------- | 
-| Tacotron 1 & 2 | 2017-DEC | 1722.72 (MB) | 0.35 | 2.21|
+| Tacotron 1 & 2 | 2017-DEC | 1722.72 (MB) | 0.13 | 2.21|
 | FastSpeech 1 & 2 | 2020-JUN | 443.29 (MB) | 0.12 | 4.21 |
 | Glow-TTS | 2020-MAY | 8077.96 (MB) | 0.35  | -1.46 |
 | VITS | 2021-JUN | 343.41 (MB) | 0.05 | 5.91 |
