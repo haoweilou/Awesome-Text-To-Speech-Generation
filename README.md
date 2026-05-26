@@ -18,8 +18,8 @@ Results are calculated by generating the provided samples on consumer-level hard
 | IndexTTS | 2025-FEB | 1567.35 (MB) | 0.36 | 0.86 | 
 
 # Speech Samples
-👉 **Demo page:**  
-https://haoweilou.github.io/Awesome-Text-To-Speech-Generation/
+<!-- 👉 **Demo page:**  
+https://haoweilou.github.io/Awesome-Text-To-Speech-Generation/ -->
 
 For better visibility, please view this on a desktop.
 
