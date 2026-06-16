@@ -81,6 +81,15 @@
         "cuda_mem": 2200,
         "frame_length": -1
     },
+    "VALL-E-X": {
+        "year": "2023-MAR",
+        "training_data": 70000,
+        "parameters": 370.54,
+        "generated_time": 154.24,
+        "inference_time": 65.47,
+        "cuda_mem": 1822.86,
+        "frame_length": 75
+    },
     "CosyVoice": {
         "year": "2024-JUL",
         "training_data": 171800,
@@ -101,10 +110,19 @@
     },
     "Qwen2.5-Omni": {
         "year": "2025-MAR",
-        "training_data": 3333333,
-        "parameters": 7500,
+        "training_data_": 3333333,
+        "parameters_": 7500,
         "generated_time": -1,
         "inference_time": -1,
+        "cuda_mem": -1,
+        "frame_length": -1
+    },
+    "VEVO2":{
+        "year": "2026",
+        "training_data": -1,
+        "parameters": -1,
+        "generated_time": 320,
+        "inference_time": 2670,
         "cuda_mem": -1,
         "frame_length": -1
     }
