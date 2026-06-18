@@ -118,12 +118,12 @@
         "frame_length": -1
     },
     "VEVO2":{
-        "year": "2026",
-        "training_data": -1,
-        "parameters": -1,
-        "generated_time": 320,
-        "inference_time": 2670,
-        "cuda_mem": -1,
+        "year": "2026-Mar",
+        "training_data": 108000,
+        "parameters": 872,
+        "generated_time": 363.28,
+        "inference_time": 5396,
+        "cuda_mem": 7007.02,
         "frame_length": -1
     }
 }
