@@ -118,7 +118,7 @@
         "frame_length": -1
     },
     "VEVO2":{
-        "year": "2026-Mar",
+        "year": "2026-MAR",
         "training_data": 108000,
         "parameters": 872,
         "generated_time": 363.28,
